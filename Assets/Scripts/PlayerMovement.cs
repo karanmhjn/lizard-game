@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private float dirX = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
+
+    private enum MovementState {idle, walking, jumping}
     // Start is called before the first frame update
     void Start()
     {
@@ -32,34 +34,33 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateAnimationState();
         
-        // if (Input.GetKeyDown("ctrl"))
-        // {
-        //     print("shoot");
-        // }
-
-        // if (Input.GetKeyDown("alt"))
-        // {
-        //     print("jetpack");
-        // }
     }
 
     private void UpdateAnimationState()
     {
+        MovementState state;
         if (dirX > 0f)
         {
-            anim.SetBool("Walking", true);
+            state = MovementState.walking;
             sprite.flipX = false;
         }
 
         else if (dirX < 0f)
         {
-            anim.SetBool("Walking", true);
+            state = MovementState.walking;
             sprite.flipX = true;
         }
 
         else
         {
-            anim.SetBool("Walking", false);
+            state = MovementState.idle;
         }
+
+        if (Mathf.Abs(rb.velocity.y) > 0.01f)
+        {
+            state = MovementState.jumping;
+        }
+
+        anim.SetInteger("state", (int)state);
     }
 }
