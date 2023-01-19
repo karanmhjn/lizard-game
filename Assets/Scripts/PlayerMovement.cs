@@ -14,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private float dirX = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
+    private bool inJet = false;
 
-    private enum MovementState {idle, walking, jumping}
+    private enum MovementState {idle, walking, jumping, jet}
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        MovementState state = MovementState.idle;
+
         dirX = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(MoveSpeed * dirX, rb.velocity.y);
 
@@ -36,13 +39,25 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x,JumpSpeed);
         }
 
-        UpdateAnimationState();
-        
+        UpdateAnimationState(state,inJet);
+
+        // Jetpack
+        if (Input.GetButtonDown("Fire2"))
+        {
+            if (inJet == false)
+            {
+                // Do Jetpack movement
+                inJet = true;
+            }
+            else
+            {
+                inJet = false;
+            }
+        }
     }
 
-    private void UpdateAnimationState()
+    private void UpdateAnimationState(MovementState state, bool inJet)
     {
-        MovementState state;
         if (dirX > 0f)
         {
             state = MovementState.walking;
@@ -65,6 +80,10 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.jumping;
         }
 
+        if (inJet == true)
+        {
+            state = MovementState.jet;
+        }
         anim.SetInteger("state", (int)state);
     }
 
