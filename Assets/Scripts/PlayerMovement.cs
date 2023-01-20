@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
 
     private float dirX = 0f;
+    private float dirY = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
     private bool inJet = false;
@@ -31,33 +32,56 @@ public class PlayerMovement : MonoBehaviour
     {
         MovementState state = MovementState.idle;
 
-        dirX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(MoveSpeed * dirX, rb.velocity.y);
+        // Player Movement
+        ControlMovement();
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x,JumpSpeed);
-        }
-
-        UpdateAnimationState(state,inJet);
-
-        // Jetpack
+        // Jetpack Gravity controls
         if (Input.GetButtonDown("Fire2"))
         {
             if (inJet == false)
             {
                 // Do Jetpack movement
+                rb.velocity = Vector2.zero;
+                rb.gravityScale = 0f;
                 inJet = true;
             }
             else
             {
+                // Stop Jetpack movement
                 inJet = false;
+                rb.gravityScale = 1f;
             }
+        }
+
+        // Update Animation for Dave
+        UpdateAnimationState(state, inJet);
+    }
+
+    // Manages Player Movement
+    private void ControlMovement()
+    {
+        // Horizontal Movement
+        dirX = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(MoveSpeed * dirX, rb.velocity.y);
+
+        // Vertical Movement (Only works when JetPack is on)
+        dirY = Input.GetAxis("Vertical");
+        if (inJet)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, MoveSpeed * dirY);
+        }
+
+        // Jumping Movement
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !inJet)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, JumpSpeed);
         }
     }
 
+    // Updates Animation for Dave
     private void UpdateAnimationState(MovementState state, bool inJet)
     {
+        // Walking Conditions
         if (dirX > 0f)
         {
             state = MovementState.walking;
@@ -70,23 +94,28 @@ public class PlayerMovement : MonoBehaviour
             sprite.flipX = true;
         }
 
+        // Idle Conditions
         else
         {
             state = MovementState.idle;
         }
 
+        // Jumping Conditions
         if (Mathf.Abs(rb.velocity.y) > 0.01f)
         {
             state = MovementState.jumping;
         }
-
+        // Jet Conditions
         if (inJet == true)
         {
             state = MovementState.jet;
         }
+
+        // Set the correct state of Dave for the frame into animation
         anim.SetInteger("state", (int)state);
     }
 
+    // Checks whether Dave is on the ground
     private bool IsGrounded()
     {
         // Creates a small box that is slightly below the collision box, and returns true when it goes inside any object in terrain layer.
