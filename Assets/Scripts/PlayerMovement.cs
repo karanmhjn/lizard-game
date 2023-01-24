@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,9 +41,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (inJet == false)
             {
-                // Do Jetpack movement
-                rb.velocity = Vector2.zero;
-                rb.gravityScale = 0f;
+                // Do Jetpack movement`
+
                 inJet = true;
             }
             else
