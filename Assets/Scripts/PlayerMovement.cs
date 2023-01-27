@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float dirY = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
-    private bool inJet = false;
+    private bool jetMode = false;
 
     private enum MovementState {idle, walking, jumping, jet}
     // Start is called before the first frame update
@@ -39,22 +39,22 @@ public class PlayerMovement : MonoBehaviour
         // Jetpack Gravity controls
         if (Input.GetButtonDown("Fire2"))
         {
-            if (inJet == false)
+            if (jetMode == false)
             {
                 // Do Jetpack movement`
-
-                inJet = true;
+                jetMode = true;
+                rb.gravityScale = 0f;
             }
             else
             {
                 // Stop Jetpack movement
-                inJet = false;
+                jetMode = false;
                 rb.gravityScale = 1f;
             }
         }
 
         // Update Animation for Dave
-        UpdateAnimationState(state, inJet);
+        UpdateAnimationState(state, jetMode);
     }
 
     // Manages Player Movement
@@ -66,20 +66,20 @@ public class PlayerMovement : MonoBehaviour
 
         // Vertical Movement (Only works when JetPack is on)
         dirY = Input.GetAxis("Vertical");
-        if (inJet)
+        if (jetMode)
         {
             rb.velocity = new Vector2(rb.velocity.x, MoveSpeed * dirY);
         }
 
         // Jumping Movement
-        if (Input.GetButtonDown("Jump") && IsGrounded() && !inJet)
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !jetMode)
         {
             rb.velocity = new Vector2(rb.velocity.x, JumpSpeed);
         }
     }
 
     // Updates Animation for Dave
-    private void UpdateAnimationState(MovementState state, bool inJet)
+    private void UpdateAnimationState(MovementState state, bool jetMode)
     {
         // Walking Conditions
         if (dirX > 0f)
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.jumping;
         }
         // Jet Conditions
-        if (inJet == true)
+        if (jetMode == true)
         {
             state = MovementState.jet;
         }

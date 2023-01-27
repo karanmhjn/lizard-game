@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Pickup : MonoBehaviour
 {
     public static int diamonds;
-    public static int cup;
+    public static int cup = 0;
     public Tilemap Stuff;
     public Sprite blank;
     private Sprite currentTile;
@@ -15,7 +15,7 @@ public class Pickup : MonoBehaviour
     {
         
        
-        if (collision.gameObject.tag == "Stuff")
+        if (collision.gameObject.tag == "Interactables")
         {
             Debug.Log("hey");
             currentTile = Stuff.GetSprite(Stuff.WorldToCell(gameObject.transform.position));
@@ -42,15 +42,5 @@ public class Pickup : MonoBehaviour
 
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
