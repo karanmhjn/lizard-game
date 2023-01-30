@@ -36,6 +36,13 @@ public class PlayerMovement : MonoBehaviour
         // Player Movement
         ControlMovement();
 
+        // Shooting Controls
+        if (Input.GetButtonDown("Fire1") && !jetMode)
+        {
+            // Shoot
+            Debug.Log("Shoot");
+        }
+
         // Jetpack Gravity controls
         if (Input.GetButtonDown("Fire2"))
         {
@@ -85,13 +92,15 @@ public class PlayerMovement : MonoBehaviour
         if (dirX > 0f)
         {
             state = MovementState.walking;
-            sprite.flipX = false;
+            // Sets rotation of body to 0 degrees
+            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         else if (dirX < 0f)
         {
             state = MovementState.walking;
-            sprite.flipX = true;
+            // Sets rotation to 180 degrees
+            rb.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         // Idle Conditions
