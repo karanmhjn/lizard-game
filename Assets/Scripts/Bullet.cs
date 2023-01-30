@@ -11,4 +11,17 @@ public class Bullet : MonoBehaviour
     {
         rb.velocity = transform.right * bulletSpeed;
     }
+
+
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        // Do not destroy upon 
+        if (hitInfo.name == "Dave" || hitInfo.tag == "Interactables")
+        {
+            // Do nothing
+        }
+
+        Debug.Log(hitInfo.name);
+        Destroy(gameObject);
+    }
 }
