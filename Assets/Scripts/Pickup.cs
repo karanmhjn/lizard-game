@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Pickup : MonoBehaviour
 {
-    public static int diamonds;
-    public static int pills;
+    private static int score = 0;
+    [SerializeField] private Text scoreText;
+
     public static bool cup = false;
     public Tilemap Stuff;
-    public Sprite blank;
+    
     private Sprite currentTile;
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -24,31 +26,40 @@ public class Pickup : MonoBehaviour
             if(currentTile.name == "diamond")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                diamonds = diamonds + 1;
-                Debug.Log("diamonds: " + diamonds);
+                score += 100;
             }
 
-            else if(currentTile.name == "pill")
+            if(currentTile.name == "pill")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                pills = pills + 1;
-                Debug.Log("pills: " + pills);
+                score += 50;
             }
-            else if(currentTile.name == "cup1")
+
+            if(currentTile.name == "dave-tiles_51")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                score += 150;
+            }
+
+            if(currentTile.name == "cup1")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 cup = true;
+                score += 1000;
                 Debug.Log("cup taken");
             }
-            else if(currentTile.name == "door")
+            if(currentTile.name == "door")
             {
                 if(cup == true)
                 {
                     gameObject.transform.position = new Vector3(-6.3f, -3.615f, 0f);
                     //SceneManager.LoadScene(SampleScene,LoadSceneMode.Single);
+                    SceneManager.LoadScene(1);
                 }
                 
             }
+
+            scoreText.text = "Score: " + score;
 
         }
     }
