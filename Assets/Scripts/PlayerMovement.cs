@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private BoxCollider2D coll;
 
+    [SerializeField] private Transform weapon;
+    [SerializeField] private GameObject bullet;
+
     [SerializeField] private LayerMask jumpableGround;
 
     private float dirX = 0f;
@@ -40,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !jetMode)
         {
             // Shoot
-            Debug.Log("Shoot");
+            Instantiate(bullet, weapon.position, weapon.rotation);
         }
 
         // Jetpack Gravity controls
