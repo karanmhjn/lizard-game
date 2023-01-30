@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Pickup : MonoBehaviour
+public class GameLogic : MonoBehaviour
 {
     private static int score = 0;
     [SerializeField] private Text scoreText;
@@ -18,11 +18,15 @@ public class Pickup : MonoBehaviour
     {
         
        
-        if (collision.gameObject.tag == "Interactables")
+        if (collision.gameObject.tag == "Pickups")
         {
-            // Debug.Log("hey");
+
             currentTile = Stuff.GetSprite(Stuff.WorldToCell(gameObject.transform.position));
-            // Debug.Log(currentTile.name);
+            Debug.Log(currentTile.name);
+
+            // Message to Karan Bhaiya
+            // See if you can access the delete tile function of tile pallete from within the screen itself instead of setting the position to NULL
+
             if(currentTile.name == "diamond")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
@@ -61,6 +65,11 @@ public class Pickup : MonoBehaviour
 
             scoreText.text = "Score: " + score;
 
+        }
+
+        else if (collision.gameObject.tag == "Pickups")
+        {
+            // Destroy(gameObject.Dave);
         }
     }
     
