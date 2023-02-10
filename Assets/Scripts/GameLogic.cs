@@ -45,6 +45,12 @@ public class GameLogic : MonoBehaviour
                 score += 150;
             }
 
+            if(currentTile.name == "dave-tiles_51")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                score += 150;
+            }
+
             if(currentTile.name == "cup1")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
