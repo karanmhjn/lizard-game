@@ -17,7 +17,19 @@ public class GameLogic : MonoBehaviour
 
     private void Awake()
     {
+        // Reset at the start of game
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            scoreSO.Value = 0;
+        }
+        // Initialize the score at beginning of each level
         scoreText.text = "Score: " + scoreSO.Value;
+    }
+
+    // Loads the next scene
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     
     void OnTriggerStay2D(Collider2D collision)
@@ -83,7 +95,8 @@ public class GameLogic : MonoBehaviour
                 {
                     gameObject.transform.position = new Vector3(-6.3f, -3.615f, 0f);
                     //SceneManager.LoadScene(SampleScene,LoadSceneMode.Single);
-                    SceneManager.LoadScene(1);
+                    // SceneManager.LoadScene(1);
+                    LoadNextScene();
                 }
                 
             }
