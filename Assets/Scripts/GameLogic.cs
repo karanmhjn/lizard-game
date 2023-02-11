@@ -14,6 +14,7 @@ public class GameLogic : MonoBehaviour
     public Tilemap Stuff;
     
     private Sprite currentTile;
+    
     void OnTriggerStay2D(Collider2D collision)
     {
         
@@ -45,10 +46,22 @@ public class GameLogic : MonoBehaviour
                 score += 150;
             }
 
-            if(currentTile.name == "dave-tiles_51")
+            if(currentTile.name == "dave-tiles_17")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                score += 150;
+                score += 200;
+            }
+
+            if(currentTile.name == "dave-tiles_53")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                score += 300;
+            }
+
+            if(currentTile.name == "dave-tiles_22")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                score += 500;
             }
 
             if(currentTile.name == "cup1")
