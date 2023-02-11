@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sprite;
     private BoxCollider2D coll;
+    private Sprite currentTile;
+
+    [SerializeField] private Tilemap Stuff;
 
     [SerializeField] private Transform weapon;
     [SerializeField] private GameObject bullet;
@@ -19,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
     private float dirY = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
+    
+    private bool hasGun = false;
+    private bool hasJet = false;
     private bool jetMode = false;
 
     private enum MovementState {idle, walking, jumping, jet}
@@ -39,15 +46,16 @@ public class PlayerMovement : MonoBehaviour
         // Player Movement
         ControlMovement();
 
+        
         // Shooting Controls
-        if (Input.GetButtonDown("Fire1") && !jetMode)
+        if (Input.GetButtonDown("Fire1") && hasGun)
         {
             // Shoot
             Instantiate(bullet, weapon.position, weapon.rotation);
         }
 
         // Jetpack Gravity controls
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && hasJet)
         {
             if (jetMode == false)
             {
@@ -65,6 +73,29 @@ public class PlayerMovement : MonoBehaviour
 
         // Update Animation for Dave
         UpdateAnimationState(state, jetMode);
+    }
+
+
+    // Collection of Powerups
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Pickups")
+        {
+            currentTile = Stuff.GetSprite(Stuff.WorldToCell(gameObject.transform.position));
+            
+            if(currentTile.name == "dave-tiles_43")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                hasGun = true;
+            }
+
+            if(currentTile.name == "Ddave-tileset-vga_4")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                hasJet = true;
+            }
+
+        }
     }
 
     // Manages Player Movement

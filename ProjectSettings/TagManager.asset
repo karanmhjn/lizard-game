@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Traps
   - Pickups
+  - Background
   layers:
   - Default
   - TransparentFX

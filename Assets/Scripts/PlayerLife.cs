@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
-{
+{   
+    private Rigidbody2D rb;
     private Animator anim;
     // Start is called before the first frame update
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
@@ -15,12 +18,21 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.tag == "Traps")
         {
-            killDave();
+            KillDave();
         }
     }
 
-    private void killDave()
+    private void KillDave()
     {
+        // Stops Dave from moving
+        rb.bodyType = RigidbodyType2D.Static;
+
+        // Starts Death animation
         anim.SetTrigger("death");
+    }
+
+    private void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 }

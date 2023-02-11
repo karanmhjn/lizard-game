@@ -16,11 +16,12 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         // Do not destroy upon 
-        if (hitInfo.name != "Dave" && hitInfo.tag != "Interactables")
+        if (hitInfo.name != "Dave" && hitInfo.tag != "Pickups" && hitInfo.tag != "Traps")
         {
             Debug.Log(hitInfo.name);
             Destroy(gameObject);
         }
+
             
     }
 }
