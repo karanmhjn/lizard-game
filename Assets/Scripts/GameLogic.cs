@@ -7,18 +7,24 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
-    private static int score = 0;
     [SerializeField] private Text scoreText;
+    [SerializeField] private FloatSO scoreSO;
 
     public static bool cup = false;
     public Tilemap Stuff;
     
     private Sprite currentTile;
+
+    private void Awake()
+    {
+        scoreText.text = "Score: " + scoreSO.Value;
+    }
     
     void OnTriggerStay2D(Collider2D collision)
     {
+
         
-       
+
         if (collision.gameObject.tag == "Pickups")
         {
 
@@ -31,44 +37,44 @@ public class GameLogic : MonoBehaviour
             if(currentTile.name == "diamond")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                score += 100;
+                scoreSO.Value += 100;
             }
 
             if(currentTile.name == "pill")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                score += 50;
+                scoreSO.Value += 50;
             }
 
             if(currentTile.name == "dave-tiles_51")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                score += 150;
+                scoreSO.Value += 150;
             }
 
             if(currentTile.name == "dave-tiles_17")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                score += 200;
+                scoreSO.Value += 200;
             }
 
             if(currentTile.name == "dave-tiles_53")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                score += 300;
+                scoreSO.Value += 300;
             }
 
             if(currentTile.name == "dave-tiles_22")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
-                score += 500;
+                scoreSO.Value += 500;
             }
 
             if(currentTile.name == "cup1")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 cup = true;
-                score += 1000;
+                scoreSO.Value += 1000;
                 Debug.Log("cup taken");
             }
             if(currentTile.name == "door")
@@ -81,13 +87,14 @@ public class GameLogic : MonoBehaviour
                 }
                 
             }
-
-            scoreText.text = "Score: " + score;
+            
+            scoreText.text = "Score: " + scoreSO.Value;
 
         }
 
-        else if (collision.gameObject.tag == "Pickups")
+        else if (collision.gameObject.tag == "Traps")
         {
+            // Kill Dave
             // Destroy(gameObject.Dave);
         }
     }
