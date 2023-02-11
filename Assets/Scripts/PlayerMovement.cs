@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sprite;
     private BoxCollider2D coll;
+    private Sprite currentTile;
+
+    [SerializeField] private Tilemap Stuff;
+
+    [SerializeField] private Transform weapon;
+    [SerializeField] private GameObject bullet;
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -16,7 +23,10 @@ public class PlayerMovement : MonoBehaviour
     private float dirY = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
-    private bool inJet = false;
+    
+    private bool hasGun = false;
+    private bool hasJet = false;
+    private bool jetMode = false;
 
     private enum MovementState {idle, walking, jumping, jet}
     // Start is called before the first frame update
@@ -36,25 +46,56 @@ public class PlayerMovement : MonoBehaviour
         // Player Movement
         ControlMovement();
 
-        // Jetpack Gravity controls
-        if (Input.GetButtonDown("Fire2"))
+        
+        // Shooting Controls
+        if (Input.GetButtonDown("Fire1") && hasGun)
         {
-            if (inJet == false)
+            // Shoot
+            Instantiate(bullet, weapon.position, weapon.rotation);
+        }
+
+        // Jetpack Gravity controls
+        if (Input.GetButtonDown("Fire2") && hasJet)
+        {
+            if (jetMode == false)
             {
                 // Do Jetpack movement`
-
-                inJet = true;
+                jetMode = true;
+                rb.gravityScale = 0f;
             }
             else
             {
                 // Stop Jetpack movement
-                inJet = false;
+                jetMode = false;
                 rb.gravityScale = 1f;
             }
         }
 
         // Update Animation for Dave
-        UpdateAnimationState(state, inJet);
+        UpdateAnimationState(state, jetMode);
+    }
+
+
+    // Collection of Powerups
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Pickups")
+        {
+            currentTile = Stuff.GetSprite(Stuff.WorldToCell(gameObject.transform.position));
+            
+            if(currentTile.name == "dave-tiles_43")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                hasGun = true;
+            }
+
+            if(currentTile.name == "Ddave-tileset-vga_4")
+            {
+                Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
+                hasJet = true;
+            }
+
+        }
     }
 
     // Manages Player Movement
@@ -66,32 +107,34 @@ public class PlayerMovement : MonoBehaviour
 
         // Vertical Movement (Only works when JetPack is on)
         dirY = Input.GetAxis("Vertical");
-        if (inJet)
+        if (jetMode)
         {
             rb.velocity = new Vector2(rb.velocity.x, MoveSpeed * dirY);
         }
 
         // Jumping Movement
-        if (Input.GetButtonDown("Jump") && IsGrounded() && !inJet)
+        if (Input.GetButtonDown("Jump") && IsGrounded() && !jetMode)
         {
             rb.velocity = new Vector2(rb.velocity.x, JumpSpeed);
         }
     }
 
     // Updates Animation for Dave
-    private void UpdateAnimationState(MovementState state, bool inJet)
+    private void UpdateAnimationState(MovementState state, bool jetMode)
     {
         // Walking Conditions
         if (dirX > 0f)
         {
             state = MovementState.walking;
-            sprite.flipX = false;
+            // Sets rotation of body to 0 degrees
+            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         else if (dirX < 0f)
         {
             state = MovementState.walking;
-            sprite.flipX = true;
+            // Sets rotation to 180 degrees
+            rb.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         // Idle Conditions
@@ -106,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.jumping;
         }
         // Jet Conditions
-        if (inJet == true)
+        if (jetMode == true)
         {
             state = MovementState.jet;
         }
