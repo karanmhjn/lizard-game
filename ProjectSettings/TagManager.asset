@@ -8,6 +8,10 @@ TagManager:
   - Pickups
   - Background
   - Camera edge
+  - Pills
+  - Door
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ public class PlayerLife : MonoBehaviour
 {   
     private Rigidbody2D rb;
     private Animator anim;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -16,7 +17,7 @@ public class PlayerLife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Traps")
+        if (collision.gameObject.tag == "Traps" || collision.gameObject.tag == "Enemy")
         {
             KillDave();
         }

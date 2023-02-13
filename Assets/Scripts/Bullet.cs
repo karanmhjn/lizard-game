@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         // Do not destroy upon 
         if (hitInfo.name != "Dave" && hitInfo.tag != "Pickups" && hitInfo.tag != "Traps")
