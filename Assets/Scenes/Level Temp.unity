@@ -4335,7 +4335,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shift: 7.5
-  damping: 5
 --- !u!1 &677268279
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,7 +5851,7 @@ GameObject:
   - component: {fileID: 2008635059}
   m_Layer: 0
   m_Name: Edge right
-  m_TagString: Untagged
+  m_TagString: Camera edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5919,7 +5918,7 @@ GameObject:
   - component: {fileID: 2085326443}
   m_Layer: 0
   m_Name: Edge left
-  m_TagString: Untagged
+  m_TagString: Camera edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

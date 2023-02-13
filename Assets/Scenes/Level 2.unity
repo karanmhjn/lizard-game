@@ -9179,7 +9179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shift: 7
-  damping: 5
 --- !u!1001 &642723099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10318,7 +10317,7 @@ Tilemap:
       - {fileID: 141302554, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: -1261701555, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: 843941283, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -5, y: -5, z: 0}
@@ -10589,7 +10588,7 @@ Tilemap:
       - {fileID: 141302554, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: -1261701555, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: 843941283, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 38, y: -5, z: 0}
@@ -10977,7 +10976,7 @@ GameObject:
   - component: {fileID: 1572636219}
   m_Layer: 0
   m_Name: Edge right
-  m_TagString: Untagged
+  m_TagString: Camera edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13613,7 +13612,7 @@ GameObject:
   - component: {fileID: 1660741902}
   m_Layer: 0
   m_Name: Edge left
-  m_TagString: Untagged
+  m_TagString: Camera edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

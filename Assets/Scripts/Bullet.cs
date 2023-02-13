@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    PlayerMovement playerMovement;
+    [SerializeField] private GameObject Dave;
+
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private Rigidbody2D rb;
+
+    void Awake()
+    {
+        playerMovement = Dave.GetComponent<PlayerMovement>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +30,11 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log(hitInfo.name);
             Destroy(gameObject);
-        }
 
+            // Debug.Log(playerMovement.shotFired);
+            // playerMovement.Invoke("destroyedBullet",3);
+            // Debug.Log(playerMovement.shotFired);
+        }
             
     }
 }

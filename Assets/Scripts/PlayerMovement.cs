@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float MoveSpeed = 5f;
     
     private bool hasGun = false;
+    // public bool shotFired = false;          // Accessed by bullet.cs
     private bool hasJet = false;
     private bool jetMode = false;
 
@@ -48,8 +49,9 @@ public class PlayerMovement : MonoBehaviour
 
         
         // Shooting Controls
-        if (Input.GetButtonDown("Fire1") && hasGun)
+        if (Input.GetButtonDown("Fire1") && hasGun)    // && !shotFired
         {
+            // shotFired = true;
             // Shoot
             Instantiate(bullet, weapon.position, weapon.rotation);
         }
@@ -74,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
         // Update Animation for Dave
         UpdateAnimationState(state, jetMode);
     }
-
 
     // Collection of Powerups
     void OnTriggerStay2D(Collider2D collision)
