@@ -9178,15 +9178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0357f8eddadc5c478871c5939e80467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 604162715}
-  sideBoundaryLength: 10
-  shift: 120
+  shift: 7
   damping: 5
---- !u!4 &604162715 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8556492675888918562, guid: 595c6f1900dfbda47b799416b14ea259, type: 3}
-  m_PrefabInstance: {fileID: 642723099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &642723099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9245,6 +9238,10 @@ PrefabInstance:
     - target: {fileID: 8556492675888918564, guid: 595c6f1900dfbda47b799416b14ea259, type: 3}
       propertyPath: m_Name
       value: Dave
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556492675888918564, guid: 595c6f1900dfbda47b799416b14ea259, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8556492675888918565, guid: 595c6f1900dfbda47b799416b14ea259, type: 3}
       propertyPath: m_Enabled
@@ -10977,6 +10974,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1572636217}
   - component: {fileID: 1572636218}
+  - component: {fileID: 1572636219}
   m_Layer: 0
   m_Name: Edge right
   m_TagString: Untagged
@@ -11021,6 +11019,18 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &1572636219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572636216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948342a2d8f912e4287abed7616af30f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1599695580
 GameObject:
   m_ObjectHideFlags: 0
@@ -13600,6 +13610,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1660741900}
   - component: {fileID: 1660741901}
+  - component: {fileID: 1660741902}
   m_Layer: 0
   m_Name: Edge left
   m_TagString: Untagged
@@ -13644,3 +13655,15 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &1660741902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660741899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dcc283e14843ef489f3efbaec11cce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

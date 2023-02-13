@@ -4,46 +4,23 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // The camera should follow the player
-    [SerializeField] private Transform player;
-
-	[SerializeField] private float sideBoundaryLength = 10f;
-
     [SerializeField] private float shift = 8f;
 
-    [SerializeField] private float damping = 5f;
-
-	void Start ()
+    // Moves camera to the left or right.
+    // Direction takes value 1 for moving right and -1 for moving left.
+    public void MoveCamera(int direction)
     {
-
-		// the map MinX and MinY are the position that the camera STARTS
-		// minX = transform.position.x;
-		// minY = transform.position.y;
-        // minZ = transform.position.z;
-		// // the desired max boundaries
-		// maxX = mapX;
-		// maxY = mapY;
-	}
-
-	void Update ()
-    {
-
         Vector3 wantedPosition = transform.position;
 
-        float rightBoundary = transform.position.x + sideBoundaryLength;
-        float leftBoundary = transform.position.x - sideBoundaryLength;
+        wantedPosition.x += shift*direction;
 
-		if (player.transform.position.x>rightBoundary)
-        {
-            wantedPosition.x += shift;
-        }
+        // Doesn't work as we get multiple triggers when moving the trigger slowly.
+            // set the camera to go to the wanted position in a certain amount of time
+            // (Time.deltaTime * damping)
+            // transform.position = Vector3.Lerp (transform.position, wantedPosition, 0);
 
-        else if (player.transform.position.x<leftBoundary)
-        {
-            wantedPosition.x -= shift;
-        }
+        // Set the camera position to wanted position
+        transform.position = wantedPosition;
 
-        // set the camera to go to the wanted position in a certain amount of time
-        transform.position = Vector3.Lerp (transform.position, wantedPosition, (Time.deltaTime * damping));
-	}
+    }
 }
