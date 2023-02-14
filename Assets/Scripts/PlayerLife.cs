@@ -23,6 +23,14 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            KillDave();
+        }
+    }
+
     private void KillDave()
     {
         // Stops Dave from moving

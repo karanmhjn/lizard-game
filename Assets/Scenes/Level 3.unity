@@ -16806,6 +16806,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 717683229}
     m_Modifications:
+    - target: {fileID: 168939328346202536, guid: caee20acb0b2575469c74defdf702cf7, type: 3}
+      propertyPath: RotationSpeed
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 168939328346202539, guid: caee20acb0b2575469c74defdf702cf7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -16885,7 +16889,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602547579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.96, y: 0.5, z: 0}
+  m_LocalPosition: {x: 24.22, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16917,7 +16921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717683228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.51, y: 0.5, z: 0}
+  m_LocalPosition: {x: 40, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25718,7 +25722,7 @@ Tilemap:
       - {fileID: 141302554, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: -1261701555, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: 843941283, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 91, y: -5, z: 0}
@@ -25878,7 +25882,7 @@ Tilemap:
       - {fileID: 141302554, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: -1261701555, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
       - {fileID: 843941283, guid: b96962cfd8b28b543910f28c8ef36efd, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 53, y: -2, z: 0}
@@ -26213,6 +26217,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 602547581}
     m_Modifications:
+    - target: {fileID: 168939328346202536, guid: caee20acb0b2575469c74defdf702cf7, type: 3}
+      propertyPath: RotationSpeed
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 168939328346202539, guid: caee20acb0b2575469c74defdf702cf7, type: 3}
       propertyPath: m_RootOrder
       value: 0

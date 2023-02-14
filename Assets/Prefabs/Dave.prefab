@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875321dbd8142e84ea161ea41bc5f3fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Stuff: {fileID: 0}
   weapon: {fileID: 8556492677241854926}
   bullet: {fileID: 4294962383023878507, guid: 42c702685463b514f883799da25dd29b, type: 3}
   jumpableGround:
