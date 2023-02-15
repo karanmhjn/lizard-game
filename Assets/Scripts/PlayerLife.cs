@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {   
+    [SerializeField] private GameObject Dave;
+    [SerializeField] private GameObject startingDavePoint;
+    [SerializeField] private GameObject startingCameraPoint;
+    [SerializeField] private GameObject camera;
+
     private Rigidbody2D rb;
     private Animator anim;
 
     LivesCounter livesCounter;
     [SerializeField] private GameObject LivesCounterUI;
+
 
     private void Awake()
     {
@@ -27,8 +33,8 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.tag == "Traps" || collision.gameObject.tag == "Enemy")
         {
-            // KillDave();
-            livesCounter.RemoveLife();
+            // Kill Dave and go back to initial state
+            KillDave();
         }
     }
 
@@ -36,18 +42,45 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            // KillDave();
-            livesCounter.RemoveLife();
+            KillDave();
         }
     }
 
-    public void KillDave()
+    private void KillDave()
     {
+        livesCounter.RemoveLife();
+
         // Stops Dave from moving
         rb.bodyType = RigidbodyType2D.Static;
 
         // Starts Death animation
         anim.SetTrigger("death");
+
+        Invoke("ResetDave", 1);
+    }
+
+    private void ResetDave()
+    {
+        // Sets Dave back into idle state
+        anim.SetTrigger("reset");
+
+        // Resets position of both Dave and the camera
+        transform.position = startingDavePoint.transform.position;
+        transform.rotation = startingDavePoint.transform.rotation;
+        
+        camera.transform.position = startingCameraPoint.transform.position;
+        camera.transform.rotation = startingCameraPoint.transform.rotation;
+
+        // Resumes Dave's movement
+        rb.bodyType = RigidbodyType2D.Dynamic;
+    }
+    
+    public void GameOver()
+    {
+        // Stops Dave from moving
+        rb.bodyType = RigidbodyType2D.Static;
+
+        Invoke("Restart",1);
     }
 
     private void Restart()

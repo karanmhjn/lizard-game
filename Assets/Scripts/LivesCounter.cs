@@ -1,56 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LivesCounter : MonoBehaviour
 {
     [SerializeField] private float lifeImageWidth = 26f;
-    [SerializeField] private int maxNumberOfLives = 3;
-    [SerializeField] private int currentNumberOfLives =3;
+    [SerializeField] private IntSO livesSO;
 
     private RectTransform _rect;
 
     PlayerLife playerLife;
     [SerializeField] private GameObject Dave;
 
-    // public UnityEvent OutOfLives;
-
-    public int NumOfLives
+    private void setLife(int value)
     {
-        get => currentNumberOfLives;
-        private set
+        if(value < 0)
         {
-            if(value < 0)
-            {
-                playerLife.KillDave();
-            }
-
-
-
-            currentNumberOfLives = Mathf.Clamp(value, 0, maxNumberOfLives);
-            AdjustImageWidth();
+            playerLife.GameOver();
         }
+
+        AdjustImageWidth();
     }
 
     private void Awake()
     {
         playerLife = Dave.GetComponent<PlayerLife>();
         _rect = transform as RectTransform;
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            livesSO.Value = 3;
+        }
+
         AdjustImageWidth();
     }
 
     private void AdjustImageWidth()
     {
-        _rect.sizeDelta = new Vector2(lifeImageWidth*currentNumberOfLives, _rect.sizeDelta.y);
+        _rect.sizeDelta = new Vector2(lifeImageWidth*livesSO.Value, _rect.sizeDelta.y);
     }
 
     public void AddLife(int num = 1)
     {
-        NumOfLives += num;
+        livesSO.Value += num;
+        setLife(livesSO.Value);
     }
 
     public void RemoveLife(int num = 1)
     {
-        NumOfLives -= num;
+        livesSO.Value -= num;
+        setLife(livesSO.Value);
     }
 }

@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8556492675888918571}
   m_Layer: 0
   m_Name: Dave
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,6 +232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4e98e57b75cba43a2a007a1d9a6950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dave: {fileID: 8556492675888918564}
+  startingDavePoint: {fileID: 0}
+  startingCameraPoint: {fileID: 0}
+  camera: {fileID: 0}
+  LivesCounterUI: {fileID: 0}
 --- !u!1 &8556492677241854913
 GameObject:
   m_ObjectHideFlags: 0
