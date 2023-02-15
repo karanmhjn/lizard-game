@@ -8,6 +8,14 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    LivesCounter livesCounter;
+    [SerializeField] private GameObject LivesCounterUI;
+
+    private void Awake()
+    {
+        livesCounter = LivesCounterUI.GetComponent<LivesCounter>();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -19,7 +27,8 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.tag == "Traps" || collision.gameObject.tag == "Enemy")
         {
-            KillDave();
+            // KillDave();
+            livesCounter.RemoveLife();
         }
     }
 
@@ -27,11 +36,12 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            KillDave();
+            // KillDave();
+            livesCounter.RemoveLife();
         }
     }
 
-    private void KillDave()
+    public void KillDave()
     {
         // Stops Dave from moving
         rb.bodyType = RigidbodyType2D.Static;
