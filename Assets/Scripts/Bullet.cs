@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    PlayerMovement playerMovement;
+    [SerializeField] private GameObject Dave;
+
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private Rigidbody2D rb;
+
+    void Awake()
+    {
+        playerMovement = Dave.GetComponent<PlayerMovement>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,15 +23,18 @@ public class Bullet : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         // Do not destroy upon 
         if (hitInfo.name != "Dave" && hitInfo.tag != "Pickups" && hitInfo.tag != "Traps")
         {
             Debug.Log(hitInfo.name);
             Destroy(gameObject);
-        }
 
+            // Debug.Log(playerMovement.shotFired);
+            // playerMovement.Invoke("destroyedBullet",3);
+            // Debug.Log(playerMovement.shotFired);
+        }
             
     }
 }

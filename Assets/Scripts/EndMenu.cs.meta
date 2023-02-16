@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: bf13839a1df9d6f46aec80dcdb3b0988
+guid: ef4e6dc34a81f7c4ca16a712fc958d39
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - Dave: {fileID: 8556492675888918564, guid: 595c6f1900dfbda47b799416b14ea259, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

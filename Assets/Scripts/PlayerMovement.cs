@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,12 +22,22 @@ public class PlayerMovement : MonoBehaviour
     private float dirY = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
-    
+
+    [SerializeField] private GameObject gunImg;
     private bool hasGun = false;
+    // public bool shotFired = false;          // Accessed by bullet.cs
     private bool hasJet = false;
     private bool jetMode = false;
 
+    private GameObject[] _bullet;
+
     private enum MovementState {idle, walking, jumping, jet}
+
+    void Awake()
+    {
+        gunImg.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        _bullet = GameObject.FindGameObjectsWithTag("Bullet");
         MovementState state = MovementState.idle;
 
         // Player Movement
@@ -48,10 +59,13 @@ public class PlayerMovement : MonoBehaviour
 
         
         // Shooting Controls
-        if (Input.GetButtonDown("Fire1") && hasGun)
+        if (Input.GetButtonDown("Fire1") && hasGun && _bullet.Length == 0)    // && !shotFired
         {
+            
+            // shotFired = true;
             // Shoot
             Instantiate(bullet, weapon.position, weapon.rotation);
+            Debug.Log("Shots fired");
         }
 
         // Jetpack Gravity controls
@@ -75,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimationState(state, jetMode);
     }
 
-
     // Collection of Powerups
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -87,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 hasGun = true;
+                gunImg.SetActive(true);
             }
 
             if(currentTile.name == "Ddave-tileset-vga_4")

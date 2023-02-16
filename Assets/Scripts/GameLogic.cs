@@ -17,12 +17,6 @@ public class GameLogic : MonoBehaviour
 
     private void Awake()
     {
-        // Reset at the start of game
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            scoreSO.Value = 0;
-        }
-        // Initialize the score at beginning of each level
         scoreText.text = "Score: " + scoreSO.Value;
     }
 
@@ -103,12 +97,6 @@ public class GameLogic : MonoBehaviour
             
             scoreText.text = "Score: " + scoreSO.Value;
 
-        }
-
-        else if (collision.gameObject.tag == "Traps")
-        {
-            // Kill Dave
-            // Destroy(gameObject.Dave);
         }
     }
     
