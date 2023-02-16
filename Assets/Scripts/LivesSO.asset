@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38af3f502dffb847b213e6ce4cebdcf, type: 3}
   m_Name: LivesSO
   m_EditorClassIdentifier: 
-  _value: 2
+  _value: 3
   maxVal: 3
