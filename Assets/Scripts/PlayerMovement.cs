@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private bool hasJet = false;
     private bool jetMode = false;
 
+    private GameObject[] _bullet;
+
     private enum MovementState {idle, walking, jumping, jet}
 
     void Awake()
@@ -48,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        _bullet = GameObject.FindGameObjectsWithTag("Bullet");
         MovementState state = MovementState.idle;
 
         // Player Movement
@@ -55,11 +59,13 @@ public class PlayerMovement : MonoBehaviour
 
         
         // Shooting Controls
-        if (Input.GetButtonDown("Fire1") && hasGun)    // && !shotFired
+        if (Input.GetButtonDown("Fire1") && hasGun && _bullet.Length == 0)    // && !shotFired
         {
+            
             // shotFired = true;
             // Shoot
             Instantiate(bullet, weapon.position, weapon.rotation);
+            Debug.Log("Shots fired");
         }
 
         // Jetpack Gravity controls

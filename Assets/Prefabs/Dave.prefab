@@ -133,6 +133,7 @@ MonoBehaviour:
     m_Bits: 64
   JumpSpeed: 7
   MoveSpeed: 5
+  gunImg: {fileID: 0}
 --- !u!95 &8556492675888918574
 Animator:
   serializedVersion: 4
@@ -162,7 +163,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8556492675888918564}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7e98a3ab13c5a2940bffdf6886d8b2ae, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
