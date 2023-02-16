@@ -85,6 +85,6 @@ public class PlayerLife : MonoBehaviour
 
     private void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Over Screen");
     }
 }

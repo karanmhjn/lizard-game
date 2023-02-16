@@ -28,11 +28,6 @@ public class LivesCounter : MonoBehaviour
         playerLife = Dave.GetComponent<PlayerLife>();
         _rect = transform as RectTransform;
 
-        // if (SceneManager.GetActiveScene().buildIndex == 0)
-        // {
-        //     livesSO.Value = 3;
-        // }
-
         AdjustImageWidth();
     }
 

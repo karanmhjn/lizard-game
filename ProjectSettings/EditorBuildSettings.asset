@@ -11,15 +11,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/Intermediate Level.unity
-    guid: 3f0285683a18bdd488bcd99fa9781632
   - enabled: 1
     path: Assets/Scenes/Level 2.unity
     guid: 8dc76c235c9192e4b97343550a02a774
   - enabled: 1
     path: Assets/Scenes/Level 3.unity
     guid: c9fb6dbc80cae70478d915c98e07fc72
+  - enabled: 1
+    path: Assets/Scenes/Finish Screen.unity
+    guid: 607caa66f793afe499b3da7da32d838e
+  - enabled: 1
+    path: Assets/Scenes/Over Screen.unity
+    guid: 656459d111fe6e346a1229cfab01f2a3
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: a151f25651f847043ba78591bd5ef9eb

@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,13 +22,20 @@ public class PlayerMovement : MonoBehaviour
     private float dirY = 0f;
     [SerializeField] private float JumpSpeed = 7f;
     [SerializeField] private float MoveSpeed = 5f;
-    
+
+    [SerializeField] private GameObject gunImg;
     private bool hasGun = false;
     // public bool shotFired = false;          // Accessed by bullet.cs
     private bool hasJet = false;
     private bool jetMode = false;
 
     private enum MovementState {idle, walking, jumping, jet}
+
+    void Awake()
+    {
+        gunImg.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 hasGun = true;
+                gunImg.SetActive(true);
             }
 
             if(currentTile.name == "Ddave-tileset-vga_4")
