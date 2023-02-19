@@ -12,6 +12,8 @@ public class PlayerLife : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
+    public bool cheatDeath;
+    public bool neverDeath;
 
     LivesCounter livesCounter;
     [SerializeField] private GameObject LivesCounterUI;
@@ -31,7 +33,7 @@ public class PlayerLife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Traps" || collision.gameObject.tag == "Enemy")
+        if ((collision.gameObject.tag == "Traps" || collision.gameObject.tag == "Enemy")&& !neverDeath)
         {
             // Kill Dave and go back to initial state
             KillDave();
@@ -40,7 +42,7 @@ public class PlayerLife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" && !neverDeath)
         {
             KillDave();
         }
@@ -48,7 +50,11 @@ public class PlayerLife : MonoBehaviour
 
     private void KillDave()
     {
-        livesCounter.RemoveLife();
+        if (!cheatDeath)
+        {
+            livesCounter.RemoveLife();
+        }
+        
 
         // Stops Dave from moving
         rb.bodyType = RigidbodyType2D.Static;

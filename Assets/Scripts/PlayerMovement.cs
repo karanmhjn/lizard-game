@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject gunImg;
     private bool hasGun = false;
     // public bool shotFired = false;          // Accessed by bullet.cs
-    private bool hasJet = false;
-    private bool jetMode = false;
+    public static bool hasJet = false;
+    public static bool jetMode = false;
 
     private GameObject[] _bullet;
 
@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         coll = GetComponent<BoxCollider2D>();
     }
+
 
     // Update is called once per frame
     private void Update()
