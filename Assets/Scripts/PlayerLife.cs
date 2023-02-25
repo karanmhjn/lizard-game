@@ -12,6 +12,7 @@ public class PlayerLife : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
+    private bool alive;
     public bool cheatDeath;
     public bool neverDeath;
 
@@ -29,11 +30,12 @@ public class PlayerLife : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        alive = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Traps" || collision.gameObject.tag == "Enemy")&& !neverDeath)
+        if ((collision.gameObject.tag == "Traps" || collision.gameObject.tag == "Enemy")&& !neverDeath && alive)
         {
             // Kill Dave and go back to initial state
             KillDave();
@@ -42,8 +44,9 @@ public class PlayerLife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" && !neverDeath)
+        if (collision.gameObject.tag == "Enemy" && !neverDeath && alive)
         {
+            Debug.Log("Trigger");
             KillDave();
         }
     }
@@ -53,6 +56,7 @@ public class PlayerLife : MonoBehaviour
         if (!cheatDeath)
         {
             livesCounter.RemoveLife();
+            alive = false;
         }
         
 
@@ -79,6 +83,8 @@ public class PlayerLife : MonoBehaviour
 
         // Resumes Dave's movement
         rb.bodyType = RigidbodyType2D.Dynamic;
+
+        alive = true;
     }
     
     public void GameOver()
