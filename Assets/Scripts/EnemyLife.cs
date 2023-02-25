@@ -9,6 +9,8 @@ public class EnemyLife : MonoBehaviour
 
     [SerializeField] private float deathDelay = 0.5f;
 
+    [SerializeField] private AudioSource deathSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class EnemyLife : MonoBehaviour
 
         // Starts Death animation and then kills with a delay
         anim.SetTrigger("enemy_death");
+        deathSound.Play();
         Destroy(gameObject, deathDelay);
     }
 

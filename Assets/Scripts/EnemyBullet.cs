@@ -18,7 +18,6 @@ public class EnemyBullet : MonoBehaviour
         // Do not destroy upon 
         if (hitInfo.tag != "Enemy" && hitInfo.tag != "Pickups" && hitInfo.tag != "Traps")
         {
-            Debug.Log(hitInfo.name);
             Destroy(gameObject);
         }
             

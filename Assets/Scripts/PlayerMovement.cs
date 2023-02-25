@@ -33,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
     private enum MovementState {idle, walking, jumping, jet}
 
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource jetSound;
+    [SerializeField] private AudioSource powerupSound;
+
     void Awake()
     {
         gunImg.SetActive(false);
@@ -51,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
+        
         _bullet = GameObject.FindGameObjectsWithTag("Bullet");
         MovementState state = MovementState.idle;
 
@@ -66,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
             // shotFired = true;
             // Shoot
             Instantiate(bullet, weapon.position, weapon.rotation);
-            Debug.Log("Shots fired");
         }
 
         // Jetpack Gravity controls
@@ -76,12 +79,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Do Jetpack movement`
                 jetMode = true;
+                jetSound.Play();
                 rb.gravityScale = 0f;
             }
             else
             {
                 // Stop Jetpack movement
                 jetMode = false;
+                jetSound.Pause();
                 rb.gravityScale = 1f;
             }
         }
@@ -101,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 hasGun = true;
+                powerupSound.Play();
                 gunImg.SetActive(true);
             }
 
@@ -108,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 hasJet = true;
+                powerupSound.Play();
             }
 
         }
@@ -130,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         // Jumping Movement
         if (Input.GetButtonDown("Jump") && IsGrounded() && !jetMode)
         {
+            jumpSound.Play();
             rb.velocity = new Vector2(rb.velocity.x, JumpSpeed);
         }
     }

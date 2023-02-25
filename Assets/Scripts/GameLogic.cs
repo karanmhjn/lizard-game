@@ -15,6 +15,9 @@ public class GameLogic : MonoBehaviour
     
     private Sprite currentTile;
 
+    [SerializeField] private AudioSource pickupSound;
+    [SerializeField] private AudioSource cupSound;
+
     private void Awake()
     {
         scoreText.text = "Score: " + scoreSO.Value;
@@ -35,7 +38,6 @@ public class GameLogic : MonoBehaviour
         {
 
             currentTile = Stuff.GetSprite(Stuff.WorldToCell(gameObject.transform.position));
-            Debug.Log(currentTile.name);
 
             // Message to Karan Bhaiya
             // See if you can access the delete tile function of tile pallete from within the screen itself instead of setting the position to NULL
@@ -44,36 +46,42 @@ public class GameLogic : MonoBehaviour
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 scoreSO.Value += 100;
+                pickupSound.Play();
             }
 
             if(currentTile.name == "pill")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 scoreSO.Value += 50;
+                pickupSound.Play();
             }
 
             if(currentTile.name == "dave-tiles_51")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 scoreSO.Value += 150;
+                pickupSound.Play();
             }
 
             if(currentTile.name == "dave-tiles_17")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 scoreSO.Value += 200;
+                pickupSound.Play();
             }
 
             if(currentTile.name == "dave-tiles_53")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 scoreSO.Value += 300;
+                pickupSound.Play();
             }
 
             if(currentTile.name == "dave-tiles_22")
             {
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 scoreSO.Value += 500;
+                pickupSound.Play();
             }
 
             if(currentTile.name == "cup1")
@@ -81,15 +89,13 @@ public class GameLogic : MonoBehaviour
                 Stuff.SetTile (Stuff.WorldToCell(gameObject.transform.position), null);
                 cup = true;
                 scoreSO.Value += 1000;
-                Debug.Log("cup taken");
+                cupSound.Play();
             }
             if(currentTile.name == "door")
             {
                 if(cup == true)
                 {
                     gameObject.transform.position = new Vector3(-6.3f, -3.615f, 0f);
-                    //SceneManager.LoadScene(SampleScene,LoadSceneMode.Single);
-                    // SceneManager.LoadScene(1);
                     LoadNextScene();
                 }
                 
