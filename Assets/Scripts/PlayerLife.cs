@@ -19,6 +19,8 @@ public class PlayerLife : MonoBehaviour
     LivesCounter livesCounter;
     [SerializeField] private GameObject LivesCounterUI;
 
+    [SerializeField] private AudioSource deathSound;
+
 
     private void Awake()
     {
@@ -46,7 +48,6 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy" && !neverDeath && alive)
         {
-            Debug.Log("Trigger");
             KillDave();
         }
     }
@@ -54,7 +55,8 @@ public class PlayerLife : MonoBehaviour
     private void KillDave()
     {
         if (!cheatDeath)
-        {
+        {   
+            deathSound.Play();
             livesCounter.RemoveLife();
             alive = false;
         }
