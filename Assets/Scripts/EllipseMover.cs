@@ -22,8 +22,7 @@ public class EllipseMover : MonoBehaviour
 
     [SerializeField] private GameObject bullet;
 
-    [SerializeField] private float fireRatemin;
-    [SerializeField] private float fireRatemax;
+    [SerializeField] private float fireRate;
     [SerializeField] private float nextFire = 3.0f;
     
 
@@ -42,7 +41,7 @@ public class EllipseMover : MonoBehaviour
 
         if (Time.time > nextFire)
         {
-            nextFire = Time.time + Random.Range (fireRatemin, fireRatemax);
+            nextFire = Time.time + fireRate;
             Instantiate (bullet, transform.position, transform.rotation);
         }
     }

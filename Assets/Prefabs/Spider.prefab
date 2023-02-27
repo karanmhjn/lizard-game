@@ -126,8 +126,7 @@ MonoBehaviour:
   xRadius: 2
   yRadius: 0.5
   bullet: {fileID: 629879965659794681, guid: f5380677a2e52f44ebdd508314e46dc8, type: 3}
-  fireRatemin: 0.1
-  fireRatemax: 4
+  fireRate: 3
   nextFire: 3
 --- !u!58 &168939328346202542
 CircleCollider2D:

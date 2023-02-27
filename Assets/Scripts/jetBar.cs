@@ -42,7 +42,7 @@ public class jetBar : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(PlayerMovement.hasJet)
         {
@@ -51,7 +51,7 @@ public class jetBar : MonoBehaviour
             {
                 if(currentPos != player.transform.position)
                 {
-                    currentFill = currentFill - Time.deltaTime*jetPackRate;
+                    currentFill -= Time.deltaTime*jetPackRate;
                     jetBarInner.fillAmount = currentFill;
                     currentPos = player.transform.position;
                 }
