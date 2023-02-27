@@ -13,6 +13,8 @@ public class jetBar : MonoBehaviour
     public float jetPackRate;
     private float currentFill;
 
+    [SerializeField] private AudioSource jetSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,7 @@ public class jetBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerMovement.hasJet )
+        if(PlayerMovement.hasJet)
         {
             enableJetBar(jetBarInner,jetBarOuter);
             if(PlayerMovement.jetMode)
@@ -58,6 +60,7 @@ public class jetBar : MonoBehaviour
                     disableJetBar(jetBarInner,jetBarOuter);
                     PlayerMovement.hasJet = false;
                     PlayerMovement.jetMode = false;
+                    jetSound.Pause();
                     rb = player.GetComponent<Rigidbody2D>();
                     rb.gravityScale = 1f;
                 }

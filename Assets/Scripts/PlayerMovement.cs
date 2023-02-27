@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private enum MovementState {idle, walking, jumping, jet}
 
     [SerializeField] private AudioSource jumpSound;
-    [SerializeField] private AudioSource jetSound;
+    public AudioSource jetSound;
     [SerializeField] private AudioSource powerupSound;
 
     void Awake()
@@ -94,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         // Update Animation for Dave
         UpdateAnimationState(state, jetMode);
     }
+
 
     // Collection of Powerups
     void OnTriggerStay2D(Collider2D collision)
